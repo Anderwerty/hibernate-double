@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.example.entity.Customer;
+import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -20,6 +21,9 @@ public class CustomerHibernateDao implements CustomerDao {
     @Override
     public List<Customer> findAll() {
         try (Session session = sessionFactory.openSession()) {
+            // SQL: SELECT * FROM customers;
+            // HQL: FROM Client
+            // where Client - entity name, look at annotation @Entity on class Customer
             Query<Customer> customerQuery = session.createQuery("FROM Client", Customer.class);
             return customerQuery.list();
         }
@@ -31,6 +35,18 @@ public class CustomerHibernateDao implements CustomerDao {
             Customer customer = session.get(Customer.class, id);
 
             return Optional.ofNullable(customer);
+        }
+    }
+
+    public List<Customer> findByName(String name, int limit, int offset){
+        try(Session session = sessionFactory.openSession()){
+            Query<Customer> query = session.createQuery("from Client where customerName = :name", Customer.class);
+
+            query.setParameter("name", name);
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+
+            return query.getResultList();
         }
     }
 
