@@ -10,7 +10,9 @@ import lombok.Data;
 @Data
 @Table(name = "customers")
 @Entity(name ="Client")
-@NamedQuery(name ="select_all", query = "")
+//@NamedQuery(name ="select_all", query = "")
+
+// TODO: read about anemic domain model vs rich domain model
 public class Customer {
 
 //    @Column(name = "id")

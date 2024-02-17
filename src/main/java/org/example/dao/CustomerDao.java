@@ -11,6 +11,7 @@ public interface CustomerDao {
     List<Customer> findAll();
 
     Optional<Customer> findById(Integer id);
+    Optional<Customer> findById2(Integer id);
 
     void save(Customer customer);
 
