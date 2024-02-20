@@ -3,8 +3,8 @@ package org.example.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Data;
 
 @Data
@@ -28,6 +28,12 @@ public class Customer {
 
     @Column(name = "email")
     private String email;
+
+    @Column
+    private String password;
+
+    @Transient
+    private String passwordRepeated;
 
     @Column
     private int telephone;
